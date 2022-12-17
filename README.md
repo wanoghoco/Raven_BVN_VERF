@@ -1,4 +1,4 @@
-# selfie_liveness
+# BVN_VEERIFICATION
 
 A new Flutter package for verifying BVN.
 
