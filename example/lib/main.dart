@@ -3,6 +3,7 @@
 import 'package:Raven_BVN_VERF/raven_bvn_verifcation.dart';
 import 'package:flutter/material.dart';
 
+//flutter pub pub publish --dry-run
 void main() {
   runApp(const MaterialApp(home: BVNVerification()));
 }

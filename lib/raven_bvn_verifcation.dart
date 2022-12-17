@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:raven_bvn_ver/http_helper.dart';
+import 'package:raven_bvn_ver/widget/progress_dialog.dart';
 import 'package:selfie_liveness/selfie_liveness.dart';
-import 'package:Raven_BVN_VERF/http_helper.dart';
-import 'package:Raven_BVN_VERF/widget/progress_dialog.dart';
 
 class RavenVer {
   static const MethodChannel _channel =
