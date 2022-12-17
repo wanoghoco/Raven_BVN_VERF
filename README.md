@@ -1,6 +1,6 @@
 # selfie_liveness
 
-A new Flutter Plugin for verifying BVN.
+A new Flutter package for verifying BVN.
 
 
 
@@ -8,7 +8,7 @@ A new Flutter Plugin for verifying BVN.
 ## Using
 
 
-The plugin is very easy to use. to use the plugin  just call a single functions that returns a map of server response. 
+To use the package  just call a single functions that returns a map of server response. 
 
 
 ```dart
