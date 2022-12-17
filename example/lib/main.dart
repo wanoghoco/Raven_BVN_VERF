@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:Raven_BVN_VERF/raven_bvn_verifcation.dart';
 import 'package:flutter/material.dart';
 
@@ -37,11 +39,9 @@ class _ElatechLiveliness extends State<ElatechLiveliness> {
                       bvn: "",
                       assetLogo: "assets/raven_logo_white.png",
                     );
-                    if (value.isEmpty) {
-                      return;
-                    }
-                    setState(() {});
-                  } catch (ex) {}
+                  } catch (ex) {
+                    print(ex.toString());
+                  }
                 },
                 child: const Text("Click Me"))
           ]),

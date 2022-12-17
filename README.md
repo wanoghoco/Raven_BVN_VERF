@@ -15,8 +15,10 @@ The plugin is very easy to use. to use the plugin  just call a single functions 
 import 'package:Raven_BVN_VERF/raven_bvn_verifcation.dart';
 
 
-//and call and await the function to return imagePath of the captured user
-                  try {
+//and call and await the function to return server response in Map 
+                
+                
+                 try {
                     value = await RavenBVNVerification.performVerification(
                       appToken: "",
                       context: context,
@@ -24,11 +26,9 @@ import 'package:Raven_BVN_VERF/raven_bvn_verifcation.dart';
                       bvn: "",
                       assetLogo: "assets/raven_logo_white.png",
                     );
-                    if (value.isEmpty) {
-                      return;
-                    }
-                    setState(() {});
-                  } catch (ex) {}
+                  } catch (ex) {
+                    print(ex.toString());
+                  }
 
  
 ```
@@ -50,7 +50,7 @@ update your ios/Runner/info.plist
 and ios/Podfile to
 
 ```
-platform :ios, '13.0'
+platform :ios, '10.0'
 
 and run the command 'pod install'
 
