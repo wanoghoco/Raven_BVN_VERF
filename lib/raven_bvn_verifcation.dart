@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'dart:io';
-import 'package:path_provider/path_provider.dart';
+import 'package:selfie_liveness/selfie_liveness.dart';
 import 'package:Raven_BVN_VERF/http_helper.dart';
 import 'package:Raven_BVN_VERF/widget/progress_dialog.dart';
 
@@ -21,7 +18,7 @@ class RavenVer {
       int compressQualityiOS = 70,
       int compressQualityandroid = 30}) async {
     try {
-      String path = await _detectLiveness(
+      String path = await SelfieLiveness.detectLiveness(
           poweredBy: poweredBy,
           assetLogo: assetLogo,
           compressQualityiOS: compressQualityiOS,
@@ -65,61 +62,6 @@ class RavenVer {
     };
     var responseConfirm = await HttpHeler.postRequest(map, 'update_business');
     return responseConfirm;
-  }
-
-  /// selfie liveness plugin[_detectLiveness]
-  static Future<String> _detectLiveness(
-      {required String poweredBy,
-      required String assetLogo,
-      required int compressQualityiOS,
-      required int compressQualityandroid}) async {
-    if (defaultTargetPlatform != TargetPlatform.android &&
-        defaultTargetPlatform != TargetPlatform.iOS) {
-      throw Exception('platform not supported');
-    }
-    var response = await _channel.invokeMethod("detectliveliness", {
-          "msgselfieCapture": "Place your face inside the oval shaped panel",
-          "msgBlinkEye": defaultTargetPlatform == TargetPlatform.iOS
-              ? "Blink 3 Times"
-              : "Blink Your Eyes",
-          "assetPath": assetLogo,
-          "poweredBy": poweredBy
-        }) ??
-        "";
-    if (response == "") {
-      return "";
-    }
-
-    File file = File(response);
-    try {
-      var data = await _compressImage(
-          file: file,
-          compressQualityandroid: compressQualityandroid,
-          compressQualityiOS: compressQualityiOS);
-
-      return data.path;
-    } catch (ex) {
-      return file.path;
-    }
-  }
-
-  ///compressing image file [_compressImage]
-  static Future<File> _compressImage(
-      {required File file,
-      required int compressQualityandroid,
-      required int compressQualityiOS}) async {
-    Directory tempDir = await getTemporaryDirectory();
-    print(tempDir.path);
-    String dir = "${tempDir.absolute.path}/test.jpeg";
-    var result = await FlutterImageCompress.compressAndGetFile(
-      file.path,
-      dir,
-      quality: TargetPlatform.iOS == defaultTargetPlatform
-          ? compressQualityiOS
-          : compressQualityandroid,
-    );
-
-    return result!;
   }
 
   /// show dialogu  function[_showDialog]

@@ -64,23 +64,24 @@ and run the command 'pod install'
 
 ```dart
 // ignore_for_file: avoid_print
+// ignore_for_file: avoid_print
 
 import 'package:Raven_BVN_VERF/raven_bvn_verifcation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MaterialApp(home: ElatechLiveliness()));
+  runApp(const MaterialApp(home: BVNVerification()));
 }
 
-class ElatechLiveliness extends StatefulWidget {
-  const ElatechLiveliness({Key? key}) : super(key: key);
+class BVNVerification extends StatefulWidget {
+  const BVNVerification({Key? key}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
-    return _ElatechLiveliness();
+    return _BVNVerification();
   }
 }
 
-class _ElatechLiveliness extends State<ElatechLiveliness> {
+class _BVNVerification extends State<BVNVerification> {
   Map<String, dynamic> value = {};
 
   @override
@@ -111,6 +112,7 @@ class _ElatechLiveliness extends State<ElatechLiveliness> {
     );
   }
 }
+
 
 ```
 
