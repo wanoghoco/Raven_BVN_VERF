@@ -12,16 +12,23 @@ The plugin is very easy to use. to use the plugin  just call a single functions 
 
 
 ```dart
-import 'package:selfie_liveness/selfie_liveness.dart';
+import 'package:Raven_BVN_VERF/raven_bvn_verifcation.dart';
 
 
 //and call and await the function to return imagePath of the captured user
-  SelfieLiveness.detectLiveness(
-                    poweredBy: "",
-                    assetLogo: "assets/raven_logo_white.png",
-                    compressQualityandroid: 88,
-                    compressQualityiOS: 88,
-                  )
+                  try {
+                    value = await RavenBVNVerification.performVerification(
+                      appToken: "",
+                      context: context,
+                      authToken: "",
+                      bvn: "",
+                      assetLogo: "assets/raven_logo_white.png",
+                    );
+                    if (value.isEmpty) {
+                      return;
+                    }
+                    setState(() {});
+                  } catch (ex) {}
 
  
 ```

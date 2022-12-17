@@ -1,6 +1,5 @@
+import 'package:Raven_BVN_VERF/raven_bvn_verifcation.dart';
 import 'package:flutter/material.dart';
-import 'dart:io';
-import 'package:Raven_BVN_VERF/selfie_liveness.dart';
 
 void main() {
   runApp(const ElatechLiveliness());
@@ -15,7 +14,7 @@ class ElatechLiveliness extends StatefulWidget {
 }
 
 class _ElatechLiveliness extends State<ElatechLiveliness> {
-  String value = "";
+  Map<String, dynamic> value = {};
 
   @override
   Widget build(BuildContext context) {
@@ -24,23 +23,25 @@ class _ElatechLiveliness extends State<ElatechLiveliness> {
         body: SizedBox(
           width: double.infinity,
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            value != ""
-                ? Image.file(File(value), key: UniqueKey())
-                : const SizedBox(),
+            // value != ""
+            //     ? Image.file(File(value), key: UniqueKey())
+            //     : const SizedBox(),
             const Text("Press The Button To Take Photo"),
             ElevatedButton(
                 onPressed: () async {
-                  value = await SelfieLiveness.detectLiveness(
-                    poweredBy: "",
-                    assetLogo: "assets/raven_logo_white.png",
-                    compressQualityandroid: 88,
-                    compressQualityiOS: 88,
-                  );
-                  if (value.isEmpty) {
-                    return;
-                  }
-                  await FileImage(File(value)).evict();
-                  setState(() {});
+                  try {
+                    value = await RavenBVNVerification.performVerification(
+                      appToken: "",
+                      context: context,
+                      authToken: "",
+                      bvn: "",
+                      assetLogo: "assets/raven_logo_white.png",
+                    );
+                    if (value.isEmpty) {
+                      return;
+                    }
+                    setState(() {});
+                  } catch (ex) {}
                 },
                 child: const Text("Click Me"))
           ]),

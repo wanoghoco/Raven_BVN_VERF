@@ -7,20 +7,21 @@ import 'package:path_provider/path_provider.dart';
 import 'package:Raven_BVN_VERF/http_helper.dart';
 import 'package:Raven_BVN_VERF/widget/progress_dialog.dart';
 
-class SelfieLiveness {
+class RavenBVNVerification {
   static const MethodChannel _channel =
       MethodChannel("elatech_liveliness_plugin");
 
-  static Future<Map> performFacialVerification(
+  static Future<Map<String, dynamic>> performVerification(
       {required BuildContext context,
       required String bvn,
       required String appToken,
-      required String poweredBy,
-      required String assetLogo,
-      required int compressQualityiOS,
-      required int compressQualityandroid}) async {
+      required String authToken,
+      String poweredBy = "",
+      String assetLogo = "",
+      int compressQualityiOS = 70,
+      int compressQualityandroid = 30}) async {
     try {
-      String path = await detectLiveness(
+      String path = await _detectLiveness(
           poweredBy: poweredBy,
           assetLogo: assetLogo,
           compressQualityiOS: compressQualityiOS,
@@ -61,7 +62,7 @@ class SelfieLiveness {
     }
   }
 
-  static Future<String> detectLiveness(
+  static Future<String> _detectLiveness(
       {required String poweredBy,
       required String assetLogo,
       required int compressQualityiOS,
