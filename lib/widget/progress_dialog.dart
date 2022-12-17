@@ -32,9 +32,10 @@ class ProgressDialog extends StatelessWidget {
                 const SizedBox(
                   width: 5.0,
                 ),
-                const CircularProgressIndicator(
+                CircularProgressIndicator(
                   semanticsLabel: 'Please wait',
-                  valueColor: AlwaysStoppedAnimation<Color>(Color(0xff014345)),
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                      Theme.of(context).primaryColor),
                 ),
                 const SizedBox(
                   width: 25.0,

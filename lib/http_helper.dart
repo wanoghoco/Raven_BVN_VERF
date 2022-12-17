@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:http_parser/http_parser.dart';
 import 'package:mime/mime.dart';
 import 'package:http/http.dart' as http;
-import 'package:Raven_BVN_VERF/load_env.dart';
 
 class HttpHeler {
   static String apiEndpoint = 'https://posapi.getravenbank.com/v1/app';
@@ -25,13 +24,13 @@ class HttpHeler {
     }
   }
 
-  static Future<dynamic> uploadImage(
-      String path, String url, String serverImageName, String typeToken) async {
+  static Future<dynamic> uploadImage(String path, String url,
+      String serverImageName, String authToekn, String typeToken) async {
     try {
       Map<String, String> map = {
         'content-type': 'application/json',
         'accept': 'application/json',
-        'Authorization': 'Bearer ${(await LoadEnv.getEnv())['AUTH_TOKEN']}'
+        'Authorization': 'Bearer $authToekn'
       };
 
       // Find the mime type of the selected file by looking at the header bytes of the file
@@ -54,8 +53,7 @@ class HttpHeler {
       imageUploadRequest.fields['token'] = typeToken;
       imageUploadRequest.files.add(file);
       imageUploadRequest.headers['content-type'] = 'application/json';
-      imageUploadRequest.headers['Authorization'] =
-          'Bearer ${(await LoadEnv.getEnv())['AUTH_TOKEN']}';
+      imageUploadRequest.headers['Authorization'] = 'Bearer $authToekn';
 
       final streamedResponse = await imageUploadRequest.send();
       final response = await http.Response.fromStream(streamedResponse);

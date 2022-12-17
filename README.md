@@ -18,12 +18,12 @@ import 'package:Raven_BVN_VERF/raven_bvn_verifcation.dart';
 //and call and await the function to return server response in Map 
                 
                 
-                 try {
-                    value = await RavenBVNVerification.performVerification(
-                      appToken: "",
+               try {
+                    value = await RavenVer.bvnVerifcation(
+                      appToken: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
                       context: context,
-                      authToken: "",
-                      bvn: "",
+                      authToken: "ZYXWVUTSRQPOMNLKJIHGFEDCBA",
+                      bvn: "1000000001",
                       assetLogo: "assets/raven_logo_white.png",
                     );
                   } catch (ex) {
