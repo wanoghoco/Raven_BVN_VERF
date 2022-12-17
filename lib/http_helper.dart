@@ -24,14 +24,16 @@ class HttpHeler {
     }
   }
 
-  static Future<dynamic> uploadImage(String path, String url,
-      String serverImageName, String authToekn, String typeToken) async {
+  static Future<Map<String, dynamic>> uploadImage(
+      String path, String authToekn, String typeToken) async {
     try {
       Map<String, String> map = {
         'content-type': 'application/json',
         'accept': 'application/json',
         'Authorization': 'Bearer $authToekn'
       };
+
+      String url = 'https://integrations.getravenbank.com/v1/image/match';
 
       // Find the mime type of the selected file by looking at the header bytes of the file
       final mimeTypeData =
@@ -40,7 +42,7 @@ class HttpHeler {
 
       final imageUploadRequest = http.MultipartRequest('POST', Uri.parse(url));
       // Attach the file in the request
-      final file = await http.MultipartFile.fromPath(serverImageName, path,
+      final file = await http.MultipartFile.fromPath('image', path,
           contentType: MediaType(mimeTypeData![0], mimeTypeData[1]));
       // Explicitly pass the extension of the image with request body
       // Since image_picker has some bugs due which it mixes up
@@ -58,22 +60,15 @@ class HttpHeler {
       final streamedResponse = await imageUploadRequest.send();
       final response = await http.Response.fromStream(streamedResponse);
 
-      // print('status code = ' + response.statusCode.toString());
-      // print('response body = ' +  response.body.toString());
-
-      print(response.body.toString());
       if (response.statusCode == 200) {
-        String data = response.body;
-
-        print(data.toString());
-        var decodedData = jsonDecode(data);
+        var decodedData = jsonDecode(response.body);
 
         return decodedData;
       } else {
-        return 'failed';
+        throw Exception(response.body);
       }
     } catch (ex) {
-      throw Exception('No internet connectivity');
+      throw Exception(ex.toString());
     }
   }
 }

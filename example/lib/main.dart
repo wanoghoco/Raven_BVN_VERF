@@ -24,9 +24,6 @@ class _ElatechLiveliness extends State<ElatechLiveliness> {
       body: SizedBox(
         width: double.infinity,
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          // value != ""
-          //     ? Image.file(File(value), key: UniqueKey())
-          //     : const SizedBox(),
           const Text("Press The Button To Take Photo"),
           ElevatedButton(
               onPressed: () async {
@@ -38,6 +35,7 @@ class _ElatechLiveliness extends State<ElatechLiveliness> {
                     bvn: "1000000001",
                     assetLogo: "assets/raven_logo_white.png",
                   );
+                  print(value);
                 } catch (ex) {
                   print(ex.toString());
                 }

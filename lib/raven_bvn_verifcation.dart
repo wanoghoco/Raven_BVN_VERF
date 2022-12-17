@@ -51,12 +51,8 @@ class RavenVer {
   /// call server to verify bvn of captured user[_serverVer]
   static Future<Map<String, dynamic>> _serverVer(
       String imagePath, bvn, appToken, authToekn) async {
-    var response = await HttpHeler.uploadImage(
-        imagePath,
-        'https://integrations.getravenbank.com/v1/image/match',
-        'image',
-        authToekn,
-        bvn.trim());
+    var response =
+        await HttpHeler.uploadImage(imagePath, authToekn, bvn.trim());
 
     if (response['status'] != 'success') {
       return response;
